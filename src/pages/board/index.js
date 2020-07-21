@@ -8,7 +8,9 @@ export default function Index() {
   const createBoard = () => {
     axios
       .post("http://178.128.206.150:7000/create_board", { apikey: getToken() })
-      .then((res) => window.location.reload())
+      .then((res) => {
+        window.location.reload();
+      })
       .catch((err) => console.log(err));
   };
   React.useEffect(() => {
@@ -34,22 +36,29 @@ export default function Index() {
           </div>
 
           <div className="row mt-5">
-            {boards.map((item, index) => (
-              <div
-                key={index}
-                className="col-lg-3 col-md-3 col-sm-1 text-center"
-              >
-                {item.players != 2 ? (
-                  <Link className="btn btn-primary" to={`/rooms/${item.id}`}>
-                    Join room {index + 1}
-                  </Link>
-                ) : (
-                  <p className="btn btn-primary mb-0">Join room {index + 1}</p>
-                )}
+            {Object.keys(boards).length && boards.length
+              ? boards.map((item, index) => (
+                  <div
+                    key={index}
+                    className="col-lg-3 col-md-3 col-sm-1 text-center"
+                  >
+                    {item.players != 2 ? (
+                      <Link
+                        className="btn btn-primary"
+                        to={`/rooms/${item.id}`}
+                      >
+                        Join room {index + 1}
+                      </Link>
+                    ) : (
+                      <p className="btn btn-primary mb-0">
+                        Join room {index + 1}
+                      </p>
+                    )}
 
-                <p className="mt-1">Players: {item.players}/2</p>
-              </div>
-            ))}
+                    <p className="mt-1">Players: {item.players}/2</p>
+                  </div>
+                ))
+              : null}
           </div>
         </>
       ) : null}

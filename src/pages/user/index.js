@@ -31,6 +31,7 @@ export default function Index() {
           })
           .then((res) => {
             setCreateErr("");
+            window.location.href = "/rooms";
             createUser(res.data);
           })
           .catch((err) => console.log(err));
@@ -40,35 +41,51 @@ export default function Index() {
   return (
     <div className="container mt-5">
       {isAuthenticated() ? (
-        <div className="w-50 mx-auto">
-          <form
-            className="w-50 mx-auto"
-            onSubmit={(e) => {
-              e.preventDefault();
-              createPlayer();
-            }}
-          >
-            <h1>Create Player</h1>
-            <input onChange={(e) => setName(e.target.value)} type="text" />
-            {createErr != "" ? (
-              <div className="mt-1 alert alert-danger text-center">
-                {createErr}
+        <div className="row justify-content-center">
+          <div className="col-lg-5 col-md-8 col-sm-5">
+            <form
+              className="row  justify-content-center"
+              onSubmit={(e) => {
+                e.preventDefault();
+                createPlayer();
+              }}
+            >
+              <h1 className="text-center">Create Player</h1>
+              <div className="col-12">
+                <div className="mx-auto w-70">
+                  <input
+                    className="w-100"
+                    onChange={(e) => setName(e.target.value)}
+                    type="text"
+                  />
+                </div>
               </div>
-            ) : null}
-            <input
-              className="mt-2 mx-auto btn btn-primary"
-              type="submit"
-              value="Create"
-            />
-          </form>
+
+              <div className="col-12">
+                {createErr != "" ? (
+                  <div className="mt-1 alert alert-danger text-center">
+                    {createErr}
+                  </div>
+                ) : null}
+              </div>
+
+              <input
+                className="mt-2 mx-auto btn btn-primary"
+                type="submit"
+                value="Create"
+              />
+            </form>
+          </div>
         </div>
       ) : (
-        <div className="w-50 mx-auto">
-          <h1 className="text-center">Please Register</h1>
-          <div className="d-flex">
-            <button onClick={register} className="btn btn-primary mx-auto">
-              Register
-            </button>
+        <div className="row justify-content-center">
+          <div className="col-lg-5 col-md-8 col-sm-5">
+            <h1 className="text-center">Please Register</h1>
+            <div className="d-flex">
+              <button onClick={register} className="btn btn-primary mx-auto">
+                Register
+              </button>
+            </div>
           </div>
         </div>
       )}

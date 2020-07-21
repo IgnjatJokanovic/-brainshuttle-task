@@ -18,3 +18,15 @@
   border-radius: 2px;
   cursor: pointer;
 }
+
+@media (max-width: 512px) {
+  .tile-container {
+    width: 87vw;
+  }
+}
+
+@media (max-width: 1024px) {
+  .tile-container {
+    width: 87vw;
+  }
+}
